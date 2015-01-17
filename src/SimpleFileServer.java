@@ -11,7 +11,7 @@ import java.net.Socket;
 public class SimpleFileServer {
 
   public final static int SOCKET_PORT = 1001;  // you may change this
-  public final static String FILE_TO_SEND = "E:/study/i sem/java game programming/1.mp4";  // you may change this
+  public final static String FILE_TO_SEND = "D:/study/i sem/java game programming/1.mp4";  // you may change this
 
   @SuppressWarnings("resource")
 public static void main (String [] args ) throws IOException {
