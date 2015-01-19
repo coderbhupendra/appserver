@@ -204,6 +204,65 @@ vector.removeAllElements();
 
 }
 
+if((msg.equals("musicsteps")))
+	
+	{
+		
+		String index = streamFromClient.readLine();
+
+	path=index;
+	//open the file here
+	File file = new File(path);
+    FolderList g=new FolderList();
+
+	//to check if a path represents afile or directory 
+	if(file.isDirectory()){
+	System.out.println("path"+path ) ;
+	File[] ans=g.listf(path);
+
+	for (int i = 0; i < ans.length; i++) {
+		 
+	    
+	    File file1 = new File(String.valueOf(ans[i])); 
+	    if (file1.isHidden() || !file1.canRead()) 
+        continue;
+	    else
+	    {
+	   if(file1.isFile()){
+		   if (file1.getName().endsWith(".mp4")||file1.getName().endsWith(".mp3"))
+		{  id.add(1);
+		   vector.addElement(String.valueOf(ans[i]));}
+		   }
+		   
+	   
+	   if(file1.isDirectory()){
+		  {id.add(2);vector.addElement(String.valueOf(ans[i]));}
+		   }
+	    }
+	}
+
+	System.out.println("data send in music steps line 239") ;
+	streamToClient.writeObject(vector);
+	streamToClient.writeObject(id);
+
+	vector.removeAllElements();
+	id.removeAllElements();
+	}
+	else 
+	{
+Desktop.getDesktop().open(file);
+	}
+	/*else
+	{vector.removeAllElements();System.out.println("path11111222 ") ;
+	id.removeAllElements();
+	vector.add(path);id.add(11);
+		streamToClient.writeObject(vector);
+		streamToClient.writeObject(id);
+		vector.removeAllElements();
+		id.removeAllElements();
+	}*/
+
+	}
 
 if((msg.equals("music")))
 {
@@ -304,14 +363,14 @@ for (int i = 0; i < ans.length; i++) {
     else vector.addElement(String.valueOf(ans[i]));
     
    if(file1.isFile()){
-	   System.out.println("path11111 "+String.valueOf(ans[i])) ; 
+	  // System.out.println("path11111 "+String.valueOf(ans[i])) ; 
 	   if (file1.isHidden() || !file1.canRead()) 
            continue;
 	   else id.add(1);
 	   }
    
    if(file1.isDirectory()){
-	   System.out.println("path11111222 "+String.valueOf(ans[i])) ;
+	  // System.out.println("path11111222 "+String.valueOf(ans[i])) ;
 	   if (file1.isHidden() || !file1.canRead()) 
            continue; 
 	   else id.add(2);
@@ -373,14 +432,20 @@ File[] ans=g.listf(path);
 
 for (int i = 0; i < ans.length; i++) {
 	 
-    vector.addElement(String.valueOf(ans[i]));
+   
     File file1 = new File(String.valueOf(ans[i])); 
+    if (file1.isHidden() || !file1.canRead()) 
+        continue;
+    {
+    	 vector.addElement(String.valueOf(ans[i]));
+    	 
     if(file1.isFile()){
     	//System.out.println("path11111 "+String.valueOf(ans[i])) ; 
     	id.add(1);}
     if(file1.isDirectory()){
     	//System.out.println("path11111222 "+String.valueOf(ans[i]));
     	id.add(2);
+    }
     }
   
 }
@@ -395,6 +460,55 @@ id.removeAllElements();
 }
 
 }
+
+if((msg.equals("backmusic")))
+	
+{System.out.println("backmusic");
+
+	
+String indexback = streamFromClient.readLine();
+
+path=indexback;
+//open the file here
+File file = new File(path);
+FolderList g=new FolderList();
+
+//to check if a path represents afile or directory 
+if(file.isDirectory()){
+System.out.println("path"+path) ;
+File[] ans=g.listf(path);
+
+for (int i = 0; i < ans.length; i++) {
+	 
+   
+    File file1 = new File(String.valueOf(ans[i])); 
+    if (file1.isHidden() || !file1.canRead()) 
+        continue;
+    {
+    	 
+    	 
+    if(file1.isFile()&&(file1.getName().endsWith(".mp4")||file1.getName().endsWith(".mp3"))){
+    	//System.out.println("path11111 "+String.valueOf(ans[i])) ; 
+    	id.add(1);vector.addElement(String.valueOf(ans[i]));}
+    if(file1.isDirectory()){
+    	//System.out.println("path11111222 "+String.valueOf(ans[i]));
+    	id.add(2);vector.addElement(String.valueOf(ans[i]));
+    }
+    }
+  
+}
+
+streamToClient.writeObject(vector);
+streamToClient.writeObject(id);
+vector.removeAllElements();
+
+
+id.removeAllElements();
+
+}
+
+}
+
 if((msg.equals("position")))
 {   
 	
@@ -511,6 +625,7 @@ System.out.print("Exception Occurred3: "+e);
 
 }//end of Connect()
 
+//this for scanning mp4 through out the folder
 public static void extractsong (File dir) {
     File l[] = dir.listFiles();
 
@@ -525,7 +640,7 @@ public static void extractsong (File dir) {
         if (x.isHidden() || !x.canRead()) 
             continue;
         else if (x.getName().endsWith(".mp4"))
-        {  System.out.println(x.getPath());//name should be included in path
+        { // System.out.println(x.getPath()+"file");//name should be included in path
         
         vector.addElement(x.getPath());
         }
