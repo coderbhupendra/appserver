@@ -546,7 +546,7 @@ r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);}
 else if((msg.equals("first")))
 {Robot r = new Robot();  
 r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-r.delay(200);
+
 r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);}
 else if((msg.equals("second")))
 {Robot r = new Robot();//  r.mousePress(InputEvent.BUTTON2_DOWN_MASK);
@@ -555,16 +555,15 @@ r.delay(200);
 r.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);}
 else if((msg.equals("third")))
 {Robot r = new Robot(); // r.mousePress(InputEvent.BUTTON3_DOWN_MASK);
-r.keyPress(KeyEvent.VK_DOWN);
-r.delay(200);
+
 r.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);}
 else if((msg.equals("wheelup")))
 {Robot r = new Robot();  
-r.keyPress(KeyEvent.VK_UP);
+r.keyPress(KeyEvent.VK_LEFT);
 r.delay(200);
 }
 else if((msg.equals("wheeldown"))){Robot r = new Robot();  
-r.keyPress(KeyEvent.VK_DOWN);
+r.keyPress(KeyEvent.VK_RIGHT);
 r.delay(200);
 }
 
